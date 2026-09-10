@@ -1,46 +1,65 @@
 # Esempio avanzato di risoluzione — Prestazioni, throughput e congestione
 
-## Traccia
-Un collegamento tra sorgente e destinazione è composto da due link in serie:
-- Link 1: `100 Mbps`
-- Link 2: `20 Mbps`
+## Traccia reale di riferimento
+Questa scheda è pensata per le tracce storiche di `Parte A` in cui compaiono calcoli di:
+- tempo di trasmissione
+- throughput utile
+- collo di bottiglia
+- ritardi di propagazione / trasmissione
+- effetti di code o congestione
 
-Si deve trasferire un file di `200 Mbit`.
-Il ritardo di propagazione totale è `30 ms`.
-Calcolare:
+## Metodo di risoluzione
+### 1. Separare i dati del problema
+Individua subito:
+- dimensione del file o quantità di dati da trasferire
+- capacità dei link
+- eventuali ritardi
+- numero di salti o tratte
+- presenza di ACK, buffering o congestione
+
+### 2. Individuare il collo di bottiglia
+Se il percorso ha più link in serie, la banda effettiva massima è limitata dal link più lento.
+
+### 3. Normalizzare le unità
+Prima di calcolare:
+- `Mb/s` e `MB/s` non sono equivalenti
+- `ms` va convertito in secondi se serve
+- `KB` / `MB` / `KiB` vanno interpretati come nel testo della prova
+
+### 4. Calcolare il tempo base
+Formula tipica:
+- `tempo = dati / banda`
+
+Poi, se richiesto:
+- somma i ritardi di propagazione
+- aggiungi eventuali tempi di attesa / trasmissione per hop
+- considera overhead o finestre se il problema li introduce
+
+## Schema di risposta
+Usa sempre questo ordine:
 1. collo di bottiglia
-2. tempo minimo di trasmissione
-3. tempo complessivo includendo la propagazione
-
-## Procedura
-### 1. Individuare il collo di bottiglia
-Tra `100 Mbps` e `20 Mbps`, il collo di bottiglia è **20 Mbps**.
-
-### 2. Calcolare il tempo di trasmissione ideale
-`tempo = dati / banda`
-
-`200 Mbit / 20 Mbit/s = 10 s`
-
-### 3. Aggiungere il ritardo di propagazione
-`30 ms = 0,03 s`
-
-Tempo complessivo minimo:
-`10 + 0,03 = 10,03 s`
-
-## Risposta
-- Collo di bottiglia: `20 Mbps`
-- Tempo minimo di trasmissione: `10 s`
-- Tempo complessivo minimo: `10,03 s`
-
-## Osservazioni utili all’esame
-- La banda finale è determinata dal link più lento.
-- Il ritardo di propagazione si somma al tempo di trasmissione.
-- Se il testo introduce ACK, code o congestione, il tempo reale può aumentare.
+2. conversione unità
+3. tempo base
+4. aggiunte richieste dal testo
+5. controllo finale di coerenza
 
 ## Errori tipici
-- Sommare le bande invece di prendere il minimo.
-- Dimenticare di convertire i millisecondi in secondi.
-- Confondere il tempo di trasmissione con il ritardo di propagazione.
+- sommare le bande invece di prendere il minimo
+- confondere throughput con banda nominale
+- dimenticare la conversione tra bit e byte
+- trattare il ritardo di propagazione come tempo di trasmissione
 
-## Come riconoscere il tema in prova
-Parole chiave: `throughput`, `banda`, `ritardo`, `propagazione`, `congestione`, `collo di bottiglia`, `tempo totale`.
+## Template da copiare in prova
+**Dati:** ...
+
+**Collo di bottiglia:** ...
+
+**Calcolo del tempo base:** ...
+
+**Ritardi aggiuntivi:** ...
+
+**Risultato finale:** ...
+
+## Come usare questa scheda
+Cerca nelle tracce reali parole come:
+`throughput`, `ritardo`, `propagazione`, `trasmissione`, `congestione`, `banda`, `tempo di trasferimento`.
